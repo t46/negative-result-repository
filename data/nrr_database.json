@@ -1,0 +1,984 @@
+{
+  "results": [
+    {
+      "experiment_id": "2108755",
+      "description": "baseline",
+      "status": "keep",
+      "val_accuracy": 0.7094,
+      "baseline_accuracy": 0.0,
+      "accuracy_delta": 0.7094,
+      "memory_gb": 1.1,
+      "failure_category": "no_improvement",
+      "change_category": "multiple",
+      "config_diffs": [],
+      "feature_vector": [
+        7.094,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "lesson": ""
+    },
+    {
+      "experiment_id": "61b4eb4",
+      "description": "Increase learning rate from 0.01 to 0.1 to potentially achieve faster convergence and better accuracy with SGD optimizer.",
+      "status": "discard",
+      "val_accuracy": 0.6931,
+      "baseline_accuracy": 0.7094,
+      "accuracy_delta": -0.01629999999999998,
+      "memory_gb": 1.1,
+      "failure_category": "no_improvement",
+      "change_category": "learning_rate",
+      "config_diffs": [
+        {
+          "parameter": "LEARNING_RATE",
+          "baseline_value": "0.01",
+          "experiment_value": "0.1",
+          "change_category": "learning_rate"
+        }
+      ],
+      "feature_vector": [
+        -0.1629999999999998,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        9.0
+      ],
+      "lesson": "Change did not improve accuracy (-0.0163). Category: learning_rate. This modification does not help in the current configuration."
+    },
+    {
+      "experiment_id": "1a88964",
+      "description": "Switch optimizer from SGD to AdamW which often provides better convergence and generalization on CIFAR-10.",
+      "status": "discard",
+      "val_accuracy": 0.4447,
+      "baseline_accuracy": 0.7094,
+      "accuracy_delta": -0.26470000000000005,
+      "memory_gb": 1.1,
+      "failure_category": "regression",
+      "change_category": "optimizer",
+      "config_diffs": [
+        {
+          "parameter": "OPTIMIZER",
+          "baseline_value": "sgd",
+          "experiment_value": "adamw",
+          "change_category": "optimizer"
+        }
+      ],
+      "feature_vector": [
+        -2.6470000000000002,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "lesson": "Change caused significant regression (-0.2647). Category: optimizer. This direction of change is actively harmful."
+    },
+    {
+      "experiment_id": "d0545bb",
+      "description": "Reduce learning rate to 0.005 to provide more stable convergence with SGD and cosine annealing scheduler.",
+      "status": "discard",
+      "val_accuracy": 0.705,
+      "baseline_accuracy": 0.7094,
+      "accuracy_delta": -0.0044000000000000705,
+      "memory_gb": 1.1,
+      "failure_category": "marginal",
+      "change_category": "learning_rate",
+      "config_diffs": [
+        {
+          "parameter": "LEARNING_RATE",
+          "baseline_value": "0.01",
+          "experiment_value": "0.005",
+          "change_category": "learning_rate"
+        }
+      ],
+      "feature_vector": [
+        -0.044000000000000705,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0,
+        0.5
+      ],
+      "lesson": "Change was marginal (-0.0044), very close to baseline. Category: learning_rate. May work with different magnitude or combination."
+    },
+    {
+      "experiment_id": "666e157",
+      "description": "Add dropout of 0.3 to regularize the model and potentially improve generalization performance.",
+      "status": "discard",
+      "val_accuracy": 0.6952,
+      "baseline_accuracy": 0.7094,
+      "accuracy_delta": -0.01419999999999999,
+      "memory_gb": 1.1,
+      "failure_category": "no_improvement",
+      "change_category": "regularization",
+      "config_diffs": [
+        {
+          "parameter": "DROPOUT",
+          "baseline_value": "0.0",
+          "experiment_value": "0.3",
+          "change_category": "regularization"
+        }
+      ],
+      "feature_vector": [
+        -0.1419999999999999,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.3
+      ],
+      "lesson": "Change did not improve accuracy (-0.0142). Category: regularization. This modification does not help in the current configuration."
+    },
+    {
+      "experiment_id": "98aea59",
+      "description": "Increase the number of epochs from 10 to 15 to allow the model more training time which should improve convergence and validation accuracy.",
+      "status": "keep",
+      "val_accuracy": 0.7363,
+      "baseline_accuracy": 0.7094,
+      "accuracy_delta": 0.026899999999999924,
+      "memory_gb": 1.1,
+      "failure_category": "no_improvement",
+      "change_category": "training_duration",
+      "config_diffs": [
+        {
+          "parameter": "NUM_EPOCHS",
+          "baseline_value": "10",
+          "experiment_value": "15",
+          "change_category": "training_duration"
+        }
+      ],
+      "feature_vector": [
+        0.26899999999999924,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.5
+      ],
+      "lesson": ""
+    },
+    {
+      "experiment_id": "437c019",
+      "description": "Switch from ReLU to GELU activation function which often provides better performance on image classification tasks.",
+      "status": "discard",
+      "val_accuracy": 0.7304,
+      "baseline_accuracy": 0.7363,
+      "accuracy_delta": -0.005899999999999905,
+      "memory_gb": 1.1,
+      "failure_category": "no_improvement",
+      "change_category": "activation",
+      "config_diffs": [
+        {
+          "parameter": "ACTIVATION",
+          "baseline_value": "relu",
+          "experiment_value": "gelu",
+          "change_category": "activation"
+        }
+      ],
+      "feature_vector": [
+        -0.05899999999999905,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "lesson": "Change did not improve accuracy (-0.0059). Category: activation. This modification does not help in the current configuration."
+    },
+    {
+      "experiment_id": "72ce38e",
+      "description": "Add residual connections to the CNN architecture to improve gradient flow and enable better feature learning.",
+      "status": "crash",
+      "val_accuracy": 0.0,
+      "baseline_accuracy": 0.7363,
+      "accuracy_delta": -0.7363,
+      "memory_gb": 0.0,
+      "failure_category": "crash_code",
+      "change_category": "architecture",
+      "config_diffs": [
+        {
+          "parameter": "ARCHITECTURE",
+          "baseline_value": "SimpleCNN",
+          "experiment_value": "SimpleCNN+residual",
+          "change_category": "architecture"
+        }
+      ],
+      "feature_vector": [
+        -7.3629999999999995,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "lesson": "Architectural change 'Add residual connections to the CNN architecture to improve ' caused a code error. Complex structural modifications to SimpleCNN require careful implementation."
+    },
+    {
+      "experiment_id": "7e11bde",
+      "description": "Increase the model capacity by doubling the number of filters in each convolutional layer (64, 128, 256) to improve feature representation capability.",
+      "status": "discard",
+      "val_accuracy": 0.7309,
+      "baseline_accuracy": 0.7363,
+      "accuracy_delta": -0.00539999999999996,
+      "memory_gb": 1.1,
+      "failure_category": "no_improvement",
+      "change_category": "architecture",
+      "config_diffs": [
+        {
+          "parameter": "NUM_FILTERS_1",
+          "baseline_value": "32",
+          "experiment_value": "64",
+          "change_category": "architecture"
+        },
+        {
+          "parameter": "NUM_FILTERS_2",
+          "baseline_value": "64",
+          "experiment_value": "128",
+          "change_category": "architecture"
+        },
+        {
+          "parameter": "NUM_FILTERS_3",
+          "baseline_value": "128",
+          "experiment_value": "256",
+          "change_category": "architecture"
+        }
+      ],
+      "feature_vector": [
+        -0.053999999999999604,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        3.0,
+        3.0
+      ],
+      "lesson": "Change did not improve accuracy (-0.0054). Category: architecture. This modification does not help in the current configuration."
+    },
+    {
+      "experiment_id": "f83873e",
+      "description": "Enable color jitter data augmentation to improve model generalization through additional training data variety.",
+      "status": "discard",
+      "val_accuracy": 0.712,
+      "baseline_accuracy": 0.7363,
+      "accuracy_delta": -0.02429999999999999,
+      "memory_gb": 1.1,
+      "failure_category": "no_improvement",
+      "change_category": "data_augmentation",
+      "config_diffs": [
+        {
+          "parameter": "USE_COLOR_JITTER",
+          "baseline_value": "False",
+          "experiment_value": "True",
+          "change_category": "data_augmentation"
+        }
+      ],
+      "feature_vector": [
+        -0.24299999999999988,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "lesson": "Change did not improve accuracy (-0.0243). Category: data_augmentation. This modification does not help in the current configuration."
+    },
+    {
+      "experiment_id": "1261844",
+      "description": "Increase batch size from 128 to 256 to improve training stability and potentially better convergence while staying within the time budget.",
+      "status": "discard",
+      "val_accuracy": 0.7346,
+      "baseline_accuracy": 0.7363,
+      "accuracy_delta": -0.0016999999999999238,
+      "memory_gb": 1.1,
+      "failure_category": "marginal",
+      "change_category": "training_duration",
+      "config_diffs": [
+        {
+          "parameter": "BATCH_SIZE",
+          "baseline_value": "128",
+          "experiment_value": "256",
+          "change_category": "training_duration"
+        }
+      ],
+      "feature_vector": [
+        -0.016999999999999238,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "lesson": "Change was marginal (-0.0017), very close to baseline. Category: training_duration. May work with different magnitude or combination."
+    },
+    {
+      "experiment_id": "957e801",
+      "description": "Increase the FC hidden layer size from 256 to 512 to improve the model's capacity for learning complex feature representations.",
+      "status": "discard",
+      "val_accuracy": 0.7294,
+      "baseline_accuracy": 0.7363,
+      "accuracy_delta": -0.006899999999999906,
+      "memory_gb": 1.1,
+      "failure_category": "no_improvement",
+      "change_category": "architecture",
+      "config_diffs": [
+        {
+          "parameter": "FC_SIZE",
+          "baseline_value": "256",
+          "experiment_value": "512",
+          "change_category": "architecture"
+        }
+      ],
+      "feature_vector": [
+        -0.06899999999999906,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "lesson": "Change did not improve accuracy (-0.0069). Category: architecture. This modification does not help in the current configuration."
+    },
+    {
+      "experiment_id": "8d7d7c1",
+      "description": "Add a fourth convolutional block with 256 filters to increase model depth and feature representation capacity without significantly impacting training time.",
+      "status": "discard",
+      "val_accuracy": 0.7125,
+      "baseline_accuracy": 0.7363,
+      "accuracy_delta": -0.023799999999999932,
+      "memory_gb": 1.1,
+      "failure_category": "no_improvement",
+      "change_category": "architecture",
+      "config_diffs": [
+        {
+          "parameter": "NUM_BLOCKS",
+          "baseline_value": "3",
+          "experiment_value": "4",
+          "change_category": "architecture"
+        }
+      ],
+      "feature_vector": [
+        -0.23799999999999932,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.3333333333333333
+      ],
+      "lesson": "Change did not improve accuracy (-0.0238). Category: architecture. This modification does not help in the current configuration."
+    },
+    {
+      "experiment_id": "8f0cc3f",
+      "description": "Increase learning rate to 0.015 to achieve faster convergence while maintaining the stable SGD+cosine annealing setup that achieved the current best accuracy.",
+      "status": "discard",
+      "val_accuracy": 0.7309,
+      "baseline_accuracy": 0.7363,
+      "accuracy_delta": -0.00539999999999996,
+      "memory_gb": 1.1,
+      "failure_category": "no_improvement",
+      "change_category": "learning_rate",
+      "config_diffs": [
+        {
+          "parameter": "LEARNING_RATE",
+          "baseline_value": "0.01",
+          "experiment_value": "0.015",
+          "change_category": "learning_rate"
+        }
+      ],
+      "feature_vector": [
+        -0.053999999999999604,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.4999999999999999
+      ],
+      "lesson": "Change did not improve accuracy (-0.0054). Category: learning_rate. This modification does not help in the current configuration."
+    },
+    {
+      "experiment_id": "d1b77b9",
+      "description": "Add gradient clipping with max norm 1.0 to improve training stability and potentially achieve better convergence.",
+      "status": "discard",
+      "val_accuracy": 0.6823,
+      "baseline_accuracy": 0.7363,
+      "accuracy_delta": -0.05399999999999994,
+      "memory_gb": 1.1,
+      "failure_category": "regression",
+      "change_category": "multiple",
+      "config_diffs": [
+        {
+          "parameter": "GRADIENT_CLIP",
+          "baseline_value": "none",
+          "experiment_value": "1.0",
+          "change_category": "regularization"
+        }
+      ],
+      "feature_vector": [
+        -0.5399999999999994,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "lesson": "Change caused significant regression (-0.0540). Category: multiple. This direction of change is actively harmful."
+    },
+    {
+      "experiment_id": "e7e8ecb",
+      "description": "Increase learning rate to 0.012 for slightly faster convergence while staying closer to the stable 0.01 baseline that achieved good results.",
+      "status": "discard",
+      "val_accuracy": 0.7199,
+      "baseline_accuracy": 0.7363,
+      "accuracy_delta": -0.01639999999999997,
+      "memory_gb": 1.1,
+      "failure_category": "no_improvement",
+      "change_category": "learning_rate",
+      "config_diffs": [
+        {
+          "parameter": "LEARNING_RATE",
+          "baseline_value": "0.01",
+          "experiment_value": "0.012",
+          "change_category": "learning_rate"
+        }
+      ],
+      "feature_vector": [
+        -0.1639999999999997,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.2
+      ],
+      "lesson": "Change did not improve accuracy (-0.0164). Category: learning_rate. This modification does not help in the current configuration."
+    },
+    {
+      "experiment_id": "c7b5349",
+      "description": "Switch from cosine annealing to step scheduler with step size of 5 epochs to potentially improve learning rate decay timing for the 15-epoch training.",
+      "status": "discard",
+      "val_accuracy": 0.6879,
+      "baseline_accuracy": 0.7363,
+      "accuracy_delta": -0.0484,
+      "memory_gb": 1.1,
+      "failure_category": "regression",
+      "change_category": "scheduler",
+      "config_diffs": [
+        {
+          "parameter": "LR_SCHEDULER",
+          "baseline_value": "cosine",
+          "experiment_value": "step",
+          "change_category": "scheduler"
+        }
+      ],
+      "feature_vector": [
+        -0.484,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "lesson": "Change caused significant regression (-0.0484). Category: scheduler. This direction of change is actively harmful."
+    },
+    {
+      "experiment_id": "d13e3e8",
+      "description": "Increase learning rate to 0.013 to find the optimal point between the current best 0.01 and the too-high 0.015 that was tried earlier.",
+      "status": "discard",
+      "val_accuracy": 0.7158,
+      "baseline_accuracy": 0.7363,
+      "accuracy_delta": -0.020499999999999963,
+      "memory_gb": 1.1,
+      "failure_category": "no_improvement",
+      "change_category": "learning_rate",
+      "config_diffs": [
+        {
+          "parameter": "LEARNING_RATE",
+          "baseline_value": "0.01",
+          "experiment_value": "0.013",
+          "change_category": "learning_rate"
+        }
+      ],
+      "feature_vector": [
+        -0.20499999999999963,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.29999999999999993
+      ],
+      "lesson": "Change did not improve accuracy (-0.0205). Category: learning_rate. This modification does not help in the current configuration."
+    },
+    {
+      "experiment_id": "0000000",
+      "description": "LLM error: Expecting value: line 1 column 1 (char 0)",
+      "status": "crash",
+      "val_accuracy": 0.0,
+      "baseline_accuracy": 0.7363,
+      "accuracy_delta": -0.7363,
+      "memory_gb": 0.0,
+      "failure_category": "crash_infra",
+      "change_category": "multiple",
+      "config_diffs": [
+        {
+          "parameter": "UNKNOWN",
+          "baseline_value": "unknown",
+          "experiment_value": "unknown",
+          "change_category": "multiple"
+        }
+      ],
+      "feature_vector": [
+        -7.3629999999999995,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "lesson": "Infrastructure/parsing error: LLM error: Expecting value: line 1 column 1 (char 0)"
+    },
+    {
+      "experiment_id": "44fb21c",
+      "description": "Reduce weight decay from 1e-4 to 5e-5 to reduce regularization strength and potentially allow the model to fit the training data better while maintaining generalization.",
+      "status": "keep",
+      "val_accuracy": 0.7399,
+      "baseline_accuracy": 0.7363,
+      "accuracy_delta": 0.0036000000000000476,
+      "memory_gb": 1.1,
+      "failure_category": "no_improvement",
+      "change_category": "regularization",
+      "config_diffs": [
+        {
+          "parameter": "WEIGHT_DECAY",
+          "baseline_value": "1e-4",
+          "experiment_value": "5e-5",
+          "change_category": "regularization"
+        }
+      ],
+      "feature_vector": [
+        0.036000000000000476,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.5
+      ],
+      "lesson": ""
+    },
+    {
+      "experiment_id": "febd989",
+      "description": "Reduce weight decay further from 5e-5 to 2e-5 to continue the trend of reducing regularization strength that improved accuracy in the previous experiment.",
+      "status": "discard",
+      "val_accuracy": 0.723,
+      "baseline_accuracy": 0.7399,
+      "accuracy_delta": -0.016900000000000026,
+      "memory_gb": 1.1,
+      "failure_category": "no_improvement",
+      "change_category": "regularization",
+      "config_diffs": [
+        {
+          "parameter": "WEIGHT_DECAY",
+          "baseline_value": "5e-5",
+          "experiment_value": "2e-5",
+          "change_category": "regularization"
+        }
+      ],
+      "feature_vector": [
+        -0.16900000000000026,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.6
+      ],
+      "lesson": "Change did not improve accuracy (-0.0169). Category: regularization. This modification does not help in the current configuration."
+    }
+  ],
+  "patterns": [
+    {
+      "pattern_id": "pat_learning_rate",
+      "change_category": "learning_rate",
+      "description": "5 failed learning_rate experiments; 4 no_improvement; 1 marginal. Avg accuracy delta: -0.0126",
+      "evidence": [
+        "61b4eb4",
+        "d0545bb",
+        "8f0cc3f",
+        "e7e8ecb",
+        "d13e3e8"
+      ],
+      "confidence": 1.0,
+      "rule": "UNLIKELY: learning_rate changes show modest negative effect (avg -0.0126). 5 experiments tried.",
+      "avg_accuracy_delta": -0.01259999999999999,
+      "num_experiments": 5
+    },
+    {
+      "pattern_id": "pat_param_learning_rate",
+      "change_category": "learning_rate",
+      "description": "Increasing LEARNING_RATE consistently fails (n=4, avg delta=-0.0146)",
+      "evidence": [
+        "61b4eb4",
+        "d0545bb",
+        "8f0cc3f",
+        "e7e8ecb",
+        "d13e3e8"
+      ],
+      "confidence": 1.0,
+      "rule": "AVOID increasing LEARNING_RATE from current value. All 4 attempts failed.",
+      "avg_accuracy_delta": -0.01259999999999999,
+      "num_experiments": 5
+    },
+    {
+      "pattern_id": "pat_architecture",
+      "change_category": "architecture",
+      "description": "4 failed architecture experiments; 3 no_improvement; 1 crash_code. Avg accuracy delta: -0.0120",
+      "evidence": [
+        "72ce38e",
+        "7e11bde",
+        "957e801",
+        "8d7d7c1"
+      ],
+      "confidence": 0.9629629629629631,
+      "rule": "CAUTION: 25% of architecture changes crash. UNLIKELY: architecture changes show modest negative effect (avg -0.0120). 4 experiments tried.",
+      "avg_accuracy_delta": -0.012033333333333266,
+      "num_experiments": 4
+    },
+    {
+      "pattern_id": "pat_regularization",
+      "change_category": "regularization",
+      "description": "2 failed regularization experiments; 2 no_improvement. Avg accuracy delta: -0.0156",
+      "evidence": [
+        "666e157",
+        "febd989"
+      ],
+      "confidence": 0.48148148148148157,
+      "rule": "UNLIKELY: regularization changes show modest negative effect (avg -0.0156). 2 experiments tried.",
+      "avg_accuracy_delta": -0.015550000000000008,
+      "num_experiments": 2
+    },
+    {
+      "pattern_id": "pat_multiple",
+      "change_category": "multiple",
+      "description": "2 failed multiple experiments; 1 regression; 1 crash_infra. Avg accuracy delta: -0.0540",
+      "evidence": [
+        "d1b77b9",
+        "0000000"
+      ],
+      "confidence": 0.48148148148148157,
+      "rule": "CAUTION: 50% of multiple changes crash. AVOID: multiple changes cause significant regression (avg -0.0540). 2 experiments tried.",
+      "avg_accuracy_delta": -0.05399999999999994,
+      "num_experiments": 2
+    },
+    {
+      "pattern_id": "pat_optimizer",
+      "change_category": "optimizer",
+      "description": "1 failed optimizer experiments; 1 regression. Avg accuracy delta: -0.2647",
+      "evidence": [
+        "1a88964"
+      ],
+      "confidence": 0.24074074074074078,
+      "rule": "AVOID: optimizer changes cause significant regression (avg -0.2647). 1 experiments tried.",
+      "avg_accuracy_delta": -0.26470000000000005,
+      "num_experiments": 1
+    },
+    {
+      "pattern_id": "pat_activation",
+      "change_category": "activation",
+      "description": "1 failed activation experiments; 1 no_improvement. Avg accuracy delta: -0.0059",
+      "evidence": [
+        "437c019"
+      ],
+      "confidence": 0.24074074074074078,
+      "rule": "UNLIKELY: activation changes show modest negative effect (avg -0.0059). 1 experiments tried.",
+      "avg_accuracy_delta": -0.005899999999999905,
+      "num_experiments": 1
+    },
+    {
+      "pattern_id": "pat_data_augmentation",
+      "change_category": "data_augmentation",
+      "description": "1 failed data_augmentation experiments; 1 no_improvement. Avg accuracy delta: -0.0243",
+      "evidence": [
+        "f83873e"
+      ],
+      "confidence": 0.24074074074074078,
+      "rule": "AVOID: data_augmentation changes cause significant regression (avg -0.0243). 1 experiments tried.",
+      "avg_accuracy_delta": -0.02429999999999999,
+      "num_experiments": 1
+    },
+    {
+      "pattern_id": "pat_training_duration",
+      "change_category": "training_duration",
+      "description": "1 failed training_duration experiments; 1 marginal. Avg accuracy delta: -0.0017",
+      "evidence": [
+        "1261844"
+      ],
+      "confidence": 0.24074074074074078,
+      "rule": "MARGINAL: training_duration changes have near-zero effect (avg -0.0017). 1 experiments tried, none improved.",
+      "avg_accuracy_delta": -0.0016999999999999238,
+      "num_experiments": 1
+    },
+    {
+      "pattern_id": "pat_scheduler",
+      "change_category": "scheduler",
+      "description": "1 failed scheduler experiments; 1 regression. Avg accuracy delta: -0.0484",
+      "evidence": [
+        "c7b5349"
+      ],
+      "confidence": 0.24074074074074078,
+      "rule": "AVOID: scheduler changes cause significant regression (avg -0.0484). 1 experiments tried.",
+      "avg_accuracy_delta": -0.0484,
+      "num_experiments": 1
+    }
+  ]
+}

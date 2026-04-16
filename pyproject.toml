@@ -1,0 +1,14 @@
+[project]
+name = "negative-result-repository"
+version = "0.1.0"
+description = "Structure, search, and learn from failed autoresearch experiments"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "numpy>=2.4.4",
+    "pydantic>=2.13.1",
+    "scikit-learn>=1.8.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]

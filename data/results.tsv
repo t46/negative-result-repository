@@ -1,0 +1,22 @@
+commit	val_accuracy	memory_gb	status	description
+2108755	0.709400	1.1	keep	baseline
+61b4eb4	0.693100	1.1	discard	Increase learning rate from 0.01 to 0.1 to potentially achieve faster convergence and better accuracy with SGD optimizer.
+1a88964	0.444700	1.1	discard	Switch optimizer from SGD to AdamW which often provides better convergence and generalization on CIFAR-10.
+d0545bb	0.705000	1.1	discard	Reduce learning rate to 0.005 to provide more stable convergence with SGD and cosine annealing scheduler.
+666e157	0.695200	1.1	discard	Add dropout of 0.3 to regularize the model and potentially improve generalization performance.
+98aea59	0.736300	1.1	keep	Increase the number of epochs from 10 to 15 to allow the model more training time which should improve convergence and validation accuracy.
+437c019	0.730400	1.1	discard	Switch from ReLU to GELU activation function which often provides better performance on image classification tasks.
+72ce38e	0.000000	0.0	crash	Add residual connections to the CNN architecture to improve gradient flow and enable better feature learning.
+7e11bde	0.730900	1.1	discard	Increase the model capacity by doubling the number of filters in each convolutional layer (64, 128, 256) to improve feature representation capability.
+f83873e	0.712000	1.1	discard	Enable color jitter data augmentation to improve model generalization through additional training data variety.
+1261844	0.734600	1.1	discard	Increase batch size from 128 to 256 to improve training stability and potentially better convergence while staying within the time budget.
+957e801	0.729400	1.1	discard	Increase the FC hidden layer size from 256 to 512 to improve the model's capacity for learning complex feature representations.
+8d7d7c1	0.712500	1.1	discard	Add a fourth convolutional block with 256 filters to increase model depth and feature representation capacity without significantly impacting training time.
+8f0cc3f	0.730900	1.1	discard	Increase learning rate to 0.015 to achieve faster convergence while maintaining the stable SGD+cosine annealing setup that achieved the current best accuracy.
+d1b77b9	0.682300	1.1	discard	Add gradient clipping with max norm 1.0 to improve training stability and potentially achieve better convergence.
+e7e8ecb	0.719900	1.1	discard	Increase learning rate to 0.012 for slightly faster convergence while staying closer to the stable 0.01 baseline that achieved good results.
+c7b5349	0.687900	1.1	discard	Switch from cosine annealing to step scheduler with step size of 5 epochs to potentially improve learning rate decay timing for the 15-epoch training.
+d13e3e8	0.715800	1.1	discard	Increase learning rate to 0.013 to find the optimal point between the current best 0.01 and the too-high 0.015 that was tried earlier.
+0000000	0.000000	0.0	crash	LLM error: Expecting value: line 1 column 1 (char 0)
+44fb21c	0.739900	1.1	keep	Reduce weight decay from 1e-4 to 5e-5 to reduce regularization strength and potentially allow the model to fit the training data better while maintaining generalization.
+febd989	0.723000	1.1	discard	Reduce weight decay further from 5e-5 to 2e-5 to continue the trend of reducing regularization strength that improved accuracy in the previous experiment.
