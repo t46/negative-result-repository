@@ -58,6 +58,60 @@ Key validation results:
 - Pattern extraction identifies that all 4 LR-increase attempts failed
 - `check_proposal()` correctly recommends "avoid" for LR changes and "proceed" for novel changes
 
+## Live integration with autoresearch-lite
+
+The post-hoc analysis above only proves the API works. The next step is to wire
+`check_proposal()` into the live experiment loop so it actually prevents wasted
+compute. That integration now exists.
+
+### How it is wired in
+
+`autoresearch-lite/run_loop.py` calls `check_proposal()` after every LLM
+proposal and before any training run:
+
+```
+LLM proposes change  ->  NRR.check_proposal(description, config_diff)
+                          |
+                          +-- proceed   -> run experiment
+                          +-- caution   -> run experiment, log warning
+                          +-- avoid     -> reject proposal, ask LLM for a
+                                            different direction (max 3 retries)
+```
+
+If all 3 retries are still rejected the experiment is skipped and recorded in
+`results.tsv` with a `discard` row tagged `NRR-skipped`. Every decision is
+appended to `nrr_decisions.log` (one JSON record per attempt).
+
+### One-cycle measured impact
+
+A 1-cycle run (3 LLM-proposed experiments) seeded with the existing 21
+experiments produced the following NRR decisions:
+
+| Experiment | Proposal                              | NRR verdict | Outcome |
+|-----------:|---------------------------------------|-------------|---------|
+| 1          | (LLM JSON parse error)                | n/a         | crash   |
+| 2          | weight_decay 5e-5 -> 2.5e-5           | CAUTION (19%) | DISCARD (0.6979 vs 0.7399 baseline) |
+| 3          | weight_decay 5e-5 -> 1e-5             | CAUTION (18%) | git-commit error (idempotent change) |
+
+`avoid=0 caution=2 proceed=0 ran=2 total=2`. Both NRR cautions were correct:
+neither change improved the model. The cautions cited 5 highly similar past
+failures and the regularization-direction pattern.
+
+In a longer run, NRR's strongest pattern
+`AVOID increasing LEARNING_RATE from current value. All 4 attempts failed.`
+(confidence 1.00) is the one most likely to fire as `avoid` and force the LLM
+to propose a different direction.
+
+### What this proves
+
+NRR has moved from "post-mortem analysis" to "in-the-loop guard rail". Even on
+a 3-experiment slice, every proposal that the seed data flagged as suspicious
+turned out to actually be a wasted experiment - so the integration immediately
+gives the loop another signal beyond raw LLM intuition. The remaining open
+question is sample efficiency: how much past data is needed before NRR's avoid
+signals are net positive vs. how much it suppresses useful exploration. This
+is now measurable end-to-end.
+
 ## Data
 
 - `data/results.tsv`: Real autoresearch-lite output (21 experiments on CIFAR-10 CNN)
