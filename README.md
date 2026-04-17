@@ -58,6 +58,79 @@ Key validation results:
 - Pattern extraction identifies that all 4 LR-increase attempts failed
 - `check_proposal()` correctly recommends "avoid" for LR changes and "proceed" for novel changes
 
+## CLI integration (Karpathy `autoresearch` and other LLM-driven loops)
+
+`autoresearch-lite` calls `check_proposal()` from Python because it owns its
+own driver. Karpathy's [`autoresearch`](https://github.com/karpathy/autoresearch)
+has no Python driver — the LLM agent itself decides when to edit `train.py`,
+following instructions in `program.md`. To integrate with that style of loop,
+NRR exposes a CLI:
+
+```bash
+# Write the planned change (description, diff, or both) to a file:
+echo "Increase LEARNING_RATE to 0.1 to speed convergence" > /tmp/proposal.txt
+
+# Ask NRR for a verdict before touching train.py:
+uv run --directory ~/dev/negative-result-repository \
+    nrr check --proposal-file /tmp/proposal.txt
+```
+
+Output is a single JSON object on stdout:
+
+```json
+{
+  "verdict": "proceed | caution | avoid",
+  "reason": "...",
+  "similar_failures": [ ... top-5 by similarity ... ],
+  "relevant_patterns": [ ... ],
+  "estimated_success_probability": 0.21,
+  "parsed_description": "...",
+  "parsed_config_changes": {"LEARNING_RATE": "0.1"},
+  "database": "/abs/path/to/nrr_database.json"
+}
+```
+
+Exit code mirrors the verdict (`0`=proceed, `1`=caution, `2`=avoid, `3`=usage
+error) so non-LLM scripts can branch on `$?` too.
+
+The database is auto-located in this order:
+1. `$NRR_DATABASE` env var (absolute path)
+2. `<package_root>/data/nrr_database.json`
+3. `<package_root>/data/results.tsv` (parsed on the fly)
+
+### Plugging into `program.md`
+
+Add the following step to the experimentation loop in `autoresearch/program.md`
+(see the integrated fork at https://github.com/t46/autoresearch):
+
+> Before editing `train.py`, write the planned change to `/tmp/proposal.txt`
+> (a short description, optionally followed by the proposed `KEY = value`
+> assignments) and run
+> `uv run --directory ~/dev/negative-result-repository nrr check --proposal-file /tmp/proposal.txt`.
+> If `verdict` is `avoid`, pick a different direction. If `caution`, proceed
+> but acknowledge the warning in the description column of `results.tsv`.
+> If `proceed`, go ahead.
+
+### Known limitation: seed mismatch
+
+The shipped database (`data/nrr_database.json`) was harvested from
+[`autoresearch-lite`](https://github.com/t46/autoresearch-lite), which trains a
+**CIFAR-10 CNN**. The Karpathy `autoresearch` workload trains a **nanochat-style
+GPT** on text. The two share *some* hyperparameter knobs (`LEARNING_RATE`,
+`BATCH_SIZE`, `WEIGHT_DECAY`, optimizer choice) but most architecture-level
+patterns (filter widths, dropout in conv blocks, color jitter) do not transfer.
+
+In practice this means:
+
+- **Useful right now**: catching obviously-doomed knob moves like "raise LR by
+  10x", because the failure mode is dataset-agnostic.
+- **Not yet useful**: GPT-specific judgments (depth/width tradeoffs, attention
+  variants, optimizer-specific learning-rate schedules). These will only become
+  reliable once a GPT-side seed is collected by running the integrated fork
+  for some hours and feeding its `results.tsv` back into NRR.
+
+Treat the current integration as a guard rail, not an oracle.
+
 ## Live integration with autoresearch-lite
 
 The post-hoc analysis above only proves the API works. The next step is to wire
